@@ -1,10 +1,14 @@
-import { Fragment } from "react/cjs/react.production.min"
+import { Fragment } from 'react'
+import Hero from "@/components/home-page/hero"
+import FeaturedPosts from "@/components/home-page/featured-posts"
 
 function HomePage() {
-  <Fragment>
-    <Hero />
-    <FeaturedPosts />
-  </Fragment>
+  return (
+    <Fragment>
+      <Hero />
+      <FeaturedPosts />
+    </Fragment>
+  )
 }
 
 export default HomePage
