@@ -1,3 +1,13 @@
-function PostDetailPage() {}
+import { Fragment } from 'react';
 
-export default PostDetailPage
+import PostContent from '../../components/posts/post-detail/post-content';
+
+function PostDetailPage(props) {
+  return (
+    <Fragment>
+      <PostContent post={props.post} />
+    </Fragment>
+  );
+}
+
+export default PostDetailPage;
