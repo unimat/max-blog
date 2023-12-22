@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import classes from './contact-form.module.css'
 
@@ -6,11 +6,9 @@ function ContactForm() {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredName, setEnteredName] = useState('');
   const [enteredMessage, setEnteredMessage] = useState('');
-
+  
   function sendMessageHandler(event) {
     event.preventDefault()
-
-    // optional: add client-side validation
 
     fetch('/api/contact', {
       method: 'POST',

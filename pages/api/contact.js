@@ -1,20 +1,20 @@
-// import { MongoClient } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 async function handler(req, res) {
   if (req.method === 'POST') {
     const { email, name, message } = req.body;
 
-    // if (
-    //   !email ||
-    //   !email.includes('@') ||
-    //   !name ||
-    //   name.trim() === '' ||
-    //   !message ||
-    //   message.trim() === ''
-    // ) {
-    //   res.status(422).json({ message: 'Invalid input.' });
-    //   return;
-    // }
+    if (
+      !email ||
+      !email.includes('@') ||
+      !name ||
+      name.trim() === '' ||
+      !message ||
+      message.trim() === ''
+    ) {
+      res.status(422).json({ message: 'Invalid input.' });
+      return;
+    }
 
     const newMessage = {
       email,
@@ -22,31 +22,32 @@ async function handler(req, res) {
       message,
     };
 
-    console.log(newMessage)
+    // console.log(newMessage)
 
-    // let client;
+    let client;
 
-    // try {
-    //   client = await MongoClient.connect(
-    //     'mongodb+srv://maximilian:2YkcXq43KyPk0vqp@cluster0.ntrwp.mongodb.net/my-site?retryWrites=true&w=majority'
-    //   );
-    // } catch (error) {
-    //   res.status(500).json({ message: 'Could not connect to database.' });
-    //   return;
-    // }
+    try {
+      client = await MongoClient.connect(
+        // Replace <username>, <password> and <DBName> with actual values
+        'mongodb+srv://<username>:<password>@cluster0.ntrwp.mongodb.net/<DBName>?retryWrites=true&w=majority'
+      );
+    } catch (error) {
+      res.status(500).json({ message: 'Could not connect to database.' });
+      return;
+    }
 
-    // const db = client.db();
+    const db = client.db();
 
-    // try {
-    //   const result = await db.collection('messages').insertOne(newMessage);
-    //   newMessage.id = result.insertedId;
-    // } catch (error) {
-    //   client.close();
-    //   res.status(500).json({ message: 'Storing message failed!' });
-    //   return;
-    // }
+    try {
+      const result = await db.collection('messages').insertOne(newMessage);
+      newMessage.id = result.insertedId;
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: 'Storing message failed!' });
+      return;
+    }
 
-    // client.close();
+    client.close();
 
     res
       .status(201)
