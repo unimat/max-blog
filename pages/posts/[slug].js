@@ -1,5 +1,5 @@
-// import Head from 'next/head';
 import { Fragment } from 'react';
+import Head from 'next/head';
 
 import PostContent from '../../components/posts/post-detail/post-content';
 import { getPostData, getPostsFiles } from '../../lib/posts-util';
@@ -7,10 +7,10 @@ import { getPostData, getPostsFiles } from '../../lib/posts-util';
 function PostDetailPage(props) {
   return (
     <Fragment>
-      {/* <Head>
+      <Head>
         <title>{props.post.title}</title>
         <meta name='description' content={props.post.excerpt} />
-      </Head> */}
+      </Head>
       <PostContent post={props.post} />
     </Fragment>
   );
